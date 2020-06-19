@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://germini.info/js/jqvmap/src/jquery-1.8.2.js"></script>
+	</head>
+<body>
+
+
+<style>
+body {
+	margin:0px;
+	padding:0px;
+}
+	#loade{
+		transition: opacity 0.5s;
+		opacity: 0.9;
+	}
+	.hide {
+		opacity: 0;
+	}
+</style>
+<script type="text/javascript">
+	var $ = jQuery;
+	function resize() {
+		if ($( window ).width() <= 1440) {
+			location.href="/mobile";
+		} else {
+			location.href="/pc";
+		}
+	}
+	resize();
+	$( window ).resize(function() {
+		resize();
+	});
+</script>
+</body>
+</html>

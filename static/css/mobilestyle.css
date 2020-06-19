@@ -1,0 +1,34 @@
+html, body {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.menumix {
+    text-align: center;
+}
+
+.navb {
+    text-align: center;
+}
+
+.menubt {
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: blue;
+}
+
+.sel {
+    color: green;
+}
+
+.cont {
+}
+
+.navb {
+}
+
+.menumix {
+	
+}

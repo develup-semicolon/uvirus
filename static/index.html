@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="google-site-verification" content="KsU5pF5uLGKtfskNB0FWsTXT1FIMrLBYEeFHDSihuZg" />
+	<meta name="naver-site-verification" content="4a97d40c8a00195b2a8e84f730baa5e7d3dda1ba"/>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157462309-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+		gtag('config', 'UA-157462309-1');
+	</script>
+	<link rel="canonical" href="https://uvirus.kr">
+	<meta name="description" content="Uvirus Map - 실시간 신종코로나바이러스감염증 확산 지도">
+	<meta property="og:type" content="website"> 
+	<meta property="og:title" content="Uvirus Map">
+	<meta property="og:description" content="실시간 신종코로나바이러스감염증 확산 지도">
+	<meta property="og:url" content="https://uvirus.kr">
+	<meta name="facebook:card" content="summary">
+	<meta name="facebook:title" content="Uvirus Map">
+	<meta name="twitter:description" content="실시간 신종코로나바이러스감염증 확산 지도">
+	<meta name="twitter:image" content="https://uvirus.kr">
+	<meta name="twitter:domain" content="Uvirus Map">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+
+	<link rel="stylesheet" href="jquery-jvectormap-2.0.1.css" type="text/css" media="screen" />
+	<link rel="stylesheet" media="all" href="https://germini.info/js/jqvmap/src/jquery-jvectormap.css" />
+	<script src="https://germini.info/js/jqvmap/src/jquery-1.8.2.js"></script>
+	<script src="/static/js/map.js"></script>
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	
+	<script src="/static/js/bootstrap.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap-world-mill-en.js"></script>
+	<title>Uvirus Map</title>
+	<style>
+		html,
+		body {
+			height: 100vh;
+			overflow: hidden;
+
+		}
+
+		td,
+		th {
+			color: #212529 !important;
+		}
+
+		.timelines {
+			margin-left: 10px;
+			border-left: 4px solid black;
+			padding-left: 10px;
+			padding-top: 5px;
+		}
+
+		.buttons {
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 10px 15px;
+			border-radius: 20px;
+		}
+
+		/* Style the active class (and buttons on mouse-over) */
+
+		.activex,
+		.buttons:hover {
+			background-color: #9e9e9e;
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header shadow">
+		<a class="logo">Uvirus Map</a>
+		<input class="menu-btn" type="checkbox" id="menu-btn" />
+		<label class="menu-icon" for="menu-btn">
+			<span class="navicon"></span>
+		</label>
+		<ul class="menu">
+			<li>
+				<a href="/">한국 맵</a>
+			</li>
+			<li>
+				<a href="/world">국제 맵</a>
+			</li>
+			<li>
+				<a href="https://vlioo.devent.kr/">중국 감염자 수 예측</a>
+			</li>
+			<li>
+				<a href="http://www.mohw.go.kr/react/popup_200128.html">선별 진료소 현황</a>
+			</li>
+			<li>
+				<a href="/about">세미콜론</a>
+			</li>
+		</ul>
+	</div>
+	<div class="container-fluid" style="height: calc(100% - 80px);">
+		<div class="row" style="height: 100%;">
+			<div class="col-md-3" style="height: 100%;">
+				<div class="row" style="height: 100%;">
+					<div class="col-md-12 mx-0 px-2">
+						<div class="card shadow mb-2">
+							<div class='card-header py-3 d-flex flex-row align-items-center justify-content-between'>
+								<h5 class="m-0 font-weight-bold text-primary text-danger">한국 감염자</h5>
+							</div>
+							<h1 class="num card-body" id="totalconfirmed">loading</h1>
+						</div>
+					</div>
+					<!--<div class="col-md-12 mx-0 px-2">-->
+					<!--	<div class="card shadow mb-2">-->
+					<!--		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">-->
+					<!--			<h5 class="m-0 font-weight-bold text-primary text-danger">한국 치료자</h5>-->
+					<!--		</div>-->
+					<!--		<h1 class="num card-body" id="recovered">loading</h1>-->
+
+					<!--	</div>-->
+					<!--</div>-->
+					
+					<div class="col-md-12 mx-0 px-2" style="height: calc(100% - 155px);">
+						<div class="card shadow mb-2" style="height: 100%;">
+							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+								<h5 class="m-0 font-weight-bold text-primary text-danger">나라별 정보</h5>
+							</div>
+							<div style="overflow-y: scroll; height:100%" class="card-body">
+								<table class="table" id="confirmedcr" style="color:white;">
+									<thead>
+										<tr>
+											<th class="text-nowrap">나라</th>
+											<th class="text-nowrap">감염자</th>
+											<th class="text-nowrap">사망자</th>
+											<th class="text-nowrap">치료자</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-md-6 px-0" style="height: 100%;">
+				<div class="card col-md-12 px-0" style="height: 100%;"><!--895px-->
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h5 class="m-0 font-weight-bold text-primary text-danger">감염자 경로 지도</h5>
+						<!--<div style="" id="searchbtn_map">
+							<!--<button type="button" name="button" class="searchbtns btn btn-success" id="searchbtn_all" onclick="setlocation_all()">전체</button>
+							<button id="searchbtn0" class="searchbtns btn btn-danger" onclick="setlocation(0)">교민</button>
+							<!--<button type="button" name="button" class="searchbtns" onclick="setlocation(13)">교민</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(1)">1</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(2)">2</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(3)">3</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(4)">4</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(5)">5</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(6)">6</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(7)">7</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(8)">8</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(9)">9</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(10)">10</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(11)">11</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(12)">12</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(14)">14</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(15)">15</button>
+							<button type="button" name="button" class="searchbtns" onclick="setlocation(16)">16</button>
+							
+						<style>
+							#searchbtn_map {
+								display: flex;
+								justify-content: flex-start;
+								overflow-x: scroll;
+								align-items: center;
+								width: 500px;
+								height: 100%;
+								background:white;
+							}
+							.searchbtns {
+								height: 100%;
+								min-width: 70px;
+							}
+						</style>
+					</div>-->
+						
+						<div class="btn-group">
+							<div class="btn-group dropleft" role="group" id="infeconshowbtn">
+								<button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick='droptoggle_infecon(0);'>
+									<span class="sr-only">Toggle</span>
+								</button>
+								<div style='overflow-y: scroll; height:500px;' class="dropdown-menu" id="infeconshow">
+									<div style="" id="searchbtn_map_infecon">
+										<div><button id="searchbtn0" class="searchbtns btn btn-danger btn-block" onclick="setlocation_infecon(0)">교민</button></div>
+									</div>
+								</div>
+							</div>
+								<button type="button" class="btn btn-success" onclick="setlocation_all_infecon()" id="searchbtn_all_infecon">
+									전체환자
+								</button>
+							
+							<div class="btn-group">
+								<div class="btn-group dropleft" role="group" id="dailyshowbtn" style="margin-left: 10px;">
+									<button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick='droptoggle_daily(0);'>
+										<span class="sr-only">Toggle</span>
+									</button>
+									<div style='overflow-y: scroll; height:500px;' class="dropdown-menu" id="dailyshow">
+										<div style="" id="searchbtn_map_daily">
+										</div>
+									</div>
+								</div>
+									<button type="button" class="btn btn-success" onclick="setlocation_all_daily()" id="searchbtn_all_daily">
+										모든 날짜
+									</button>
+							</div>
+							
+						</div>
+						
+					</div>
+					
+					<div id="map1" class="card-body" style="height: 100%;"></div>
+					<script src="https://maps.googleapis.com/maps/api/js?region=KR&key=AIzaSyAc2h4PifzInktgpkftPNKuuDP-1lNzFvU&callback=initMap"></script>
+
+				</div>
+				<div id="map_inform"></div>
+				<div id="marker_inform">
+					<div>
+						<img src="/static/img/blue.png">: 불확실한 정보</div>
+					<div>
+						<img src="/static/img/red.png">: 정부제공 자료</div>
+					<div>
+						<img src="/static/img/green.png">: 환자 입원 병원</div>
+					<!--누군가는 보았을것이다 이 아이콘 혀느현스|현우라는사람이 만들어 주었다-->
+				</div>
+
+			</div>
+			<div class="col-md-3" style="height: 100%;">
+				<div class="row" style="height: 100%;">
+					<div class="col-md-12 mx-0 px-2">
+						<div class="card shadow mb-2">
+							<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+								<h5 class="m-0 font-weight-bold text-primary text-danger">한국 사망자</h5>
+							</div>
+							<h1 class="num card-body" id="totaldeath">loading</h1>
+
+						</div>
+					</div>
+
+					<div class="col-md-12 mx-0 px-2" style="height: calc(100% - 310px);">
+						<div class="card shadow mb-2" style="height: 100%;">
+							<div class="btnC card-header py-3 d-flex flex-row align-items-center justify-content-around flex-nowrap">
+								<div class="text-nowrap buttons activex" href="#" onclick="cm(1);">
+									<div id="mb1">한국자료</div>
+								</div>
+								<div class="text-nowrap buttons" href="#" onclick="cm(2);">
+									<div id="mb2">관련뉴스</div>
+								</div>
+								<div class="text-nowrap buttons" href="#" onclick="cm(3);">
+									<div id="mb3">관련자료</div>
+								</div>
+							</div>
+
+							<div class="showtapmenu" id="m1" style="height: 100%; overflow-y: scroll;">
+								<table class="table" id="koreainfotable">
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<div class="showtapmenu" id="m2" style="height: 100%; overflow-y: scroll;">
+								<div style="" id="newsshow" class="reload">
+								</div>
+							</div>
+							<div class="card-body" id="m3" style="overflow-y: scroll;">
+								<h4>
+									코로나바이러스란?
+								</h4>
+								<div>
+									코로나 바이러스는 광범위한 호흡기 및 소화기 감염을 일으키는 RNA 바이러스로 일반 감기, 중증급성호흡기증후군 및 중동호흡기증후군과 같은 질환을 유발할 수 있습니다. 코로나 바이러스의 전파 경로는 매우 다양합니다. 비단 감염자와의 밀접한 접촉이 없더라도 가벼운 일상 생활을 통해서 감염될 수도 있습니다.
+								</div>
+								<br>
+								<h4>
+									코로나바이러스 증상
+								</h4>
+								<div>
+									- 발열, 식욕감퇴, 구역 및 구토, 암갈색 소변, 권태감, 식욕부진, 복부 불쾌감, 황달 등등
+									<br> - 6세 미만 소아에서 대부분 무증상(70%)
+									<br> - 약 10%에게 <strong>황달</strong>이 발생
+									<br> - 연령이 높아질수록 70%이상 황달이 동반되며 증상이 심해짐
+									<br> - <strong>열</strong> 37.5도 이상 (80%이상)
+									<br> - <strong>마른 기침</strong> (80%이상)
+									<br> - <strong>근육통</strong> (10%이상)
+									<br> - <strong>두통</strong> (8%이상)
+									<br> - <strong>호흡곤란</strong> (30%이상)
+									<br> - <strong>인후통</strong> (5%이상)
+									<br> - <strong>혼동</strong> (9%이상)
+								</div><br>
+								<h4>
+									감염 예방하기
+								</h4>
+								<div>
+									<br> - 손 자주 씻으며 외출 자제
+									<br> - 감기 증세나 구토, 열이 있을 경우 즉시 병원으로 갈 것
+									<br> - 병원에서 약을 받아도 나아지지 않으면 큰 병원으로 갈 것
+									<br> - 의심 증상이 나타나면, 즉시
+									<strong>1339</strong>로 전화 할 것
+									<br>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script>
+		var btns = document.getElementsByClassName("buttons");
+		// Loop through the buttons and add the active class to the current/clicked button
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].addEventListener("click", function() {
+				var current = document.getElementsByClassName("activex");
+				current[0].className = current[0].className.replace(" activex", "");
+				this.className += " activex";
+			});
+		}
+	</script>
+	<script>
+		var f, ift, gal=1;
+		var chek_infecon=new Array();
+		var chek_daily={};
+		var all_infecon = 1;
+		var all_daily = 1;
+		function dataload() {
+			jQuery(function() {
+				var $ = jQuery;
+				$.getJSON("/static/data/infectionData.json", function(data) {
+					for (var i = 0; i < Object.keys(data.death).length; i++)
+						//deathct = deathct + data.death[Object.keys(data.death)[i]] * 1;
+					for (var i = 0; i < Object.keys(data.infected).length; i++) {
+						//confct = confct + data.infected[Object.keys(data.infected)[i]] * 1;
+						$('#confirmedcr').append("<tr><td>" + data.ctrs[Object.keys(data.ctrs)[i]] + "</td><td>" + data.infected[Object.keys(data.infected)[i]] * 1 + "</td><td>"+data.death[Object.keys(data.death)[i]] * 1+"</td><td>"+data.recoveries[Object.keys(data.recoveries)[i]] * 1 +"</td></tr>");
+						if(data.ctrs[Object.keys(data.ctrs)[i]]=="South Korea") {
+							var confct = data.infected[Object.keys(data.infected)[i]];
+							var deathct = data.death[Object.keys(data.death)[i]];
+							var recovered = data.recoveries[Object.keys(data.recoveries)[i]];
+						}
+					}
+					//alert(data.infected["CN"]);
+					$('#totaldeath').text(deathct);
+					$('#totalconfirmed').text(confct);
+					$('#recovered').text(recovered);
+				})
+				$.getJSON("/static/data/news.json", function(data) {
+				for (var i=0; i<Object.keys(data.title).length; i++){
+					$('#newsshow').append('<a href="'+data.url[Object.keys(data.url)[i]]+'" target="_blank"><div class="media text-muted"><p class="card-body media-body pb-3 mb-0 small lh-125 border-bottom border-gray"><strong class="d-block text-gray-dark">@'+data.sor[Object.keys(data.sor)[i]]+'</strong>'+data.title[Object.keys(data.title)[i]]+'</div></a>');
+				}
+			})
+				$.getJSON("/static/data/koreainfo.json", function(data) {
+					for (var i = 0; i < Object.keys(data.koreainfo).length; i++) {
+						$('#koreainfotable').append('<tr><td>' + Object.keys(data.koreainfo)[i] + '</td><td>' + data.koreainfo[Object.keys(data.koreainfo)[i]] + '</td></tr>');
+					}
+				})
+				
+				
+				chek_infecon[0]=0;
+				/*for (f=1; f<=all; f++) {
+					chek_infecon[f]=0;
+					$('#searchbtn_map_infecon').append('<div><button id="searchbtn'+f+'" class="searchbtns btn btn-danger btn-block" onclick="setlocation_infecon('+f+')">'+f+'</button></div>');
+				}*/
+				
+				var a, b, c, d, e, date;
+				for (d=firstday_year; d<=lastday_year; d++) {														//지금은 1년이상 넣을 일이 없지만 사태가 장기화된다면 이코드는 1년이상 넣을수 없으니 고치길
+					for (e=firstday_month; e<=lastday_month; e++) {
+						if (e>7) {												//달마다 일 갯수 구하기
+							c = 1;
+						} else {
+							c = 0;
+						}
+						if (e == lastday_month) {
+							b = lastday_day;
+						} else if (e%2 == c) {
+							if (e != 2) {
+								b = 30;
+							} else {
+								b = 28;
+							}
+						} else {
+							if (e != 2) {
+								b = 31;
+							} else {
+								b = 28;
+							}
+						}
+						for (a=firstday_day; a<=b; a++) {
+							date = d+"."+e+"."+a;
+							chek_daily[date] = 0;
+							$('#searchbtn_map_daily').append(`<div><button id="datebtn${date}" class="searchbtns btn btn-danger btn-block" onclick="setlocation_daily('${date}')">${date}</button></div>`);
+						}
+						firstday_day = 1;
+					}
+					firstday_month =1;
+				}
+			});	
+		}
+		dataload();
+		/*var timere=20;
+		$('#totalrecovered').text(timere/2);
+		setInterval(function() {
+			timere-=1;
+			if(timere==0) {
+				$('#totalrecovered').text("RE!");
+				location.reload();
+			} else {
+				if(timere%2==0) {
+					$('#totalrecovered').text(timere/2);
+					$('#timertt').text("Auto Refresh");
+				} else {
+					$('#totalrecovered').text("stop");
+					$('#timertt').text("Click to");
+				}
+			}
+		}, 500);*/
+		function setlocation_infecon (num) {
+			jQuery(function() {
+				var $ = jQuery;
+				//alert(num);
+				if(chek_infecon[num]==0) {
+					$('#searchbtn'+num).removeClass('btn-danger');
+					$('#searchbtn'+num).addClass('btn-success');
+					$('#searchbtn_all_infecon').removeClass('btn-success');
+					$('#searchbtn_all_infecon').addClass('btn-danger');
+					all_infecon = 0;
+					chek_infecon[num]=1;
+				} else {
+					$('#searchbtn'+num).removeClass('btn-success');
+					$('#searchbtn'+num).addClass('btn-danger');
+					chek_infecon[num]=0;
+				}
+				var f;
+				for (f=0; f<route.length; f++) {
+					marker[route[f].point1*1].setVisible(false);
+					marker[route[f].point2*1].setVisible(false);
+					flightPath[f].setVisible(false);
+				}
+				for (f=0; f<route.length; f++) {
+					if((chek_daily[route[f].date]==1 || all_daily == 1) && (chek_infecon[route[f].person_num]==1 || all_infecon==1)) {
+						marker[route[f].point1*1].setVisible(true);
+						marker[route[f].point2*1].setVisible(true);
+						flightPath[f].setVisible(true);
+					}
+				}
+				/*if (num != "0") {
+					if(gal==1) {
+						for (f=0; f<marker.length; f++) {
+							marker[f].setVisible(false);
+						}
+						for (f=0; f<flightPath.length; f++) {
+							flightPath[f].setVisible(false);
+						}
+						gal=0;
+					}
+					if(chek_infecon[num]==0) {
+						marker[route[num].point1*1].setVisible(true);
+						marker[route[num].point2*1].setVisible(true);
+						flightPath[num].setVisible(true);
+					} else {
+						marker[route[num].point1*1].setVisible(false);
+						marker[route[num].point2*1].setVisible(false);
+						flightPath[num].setVisible(false);
+					}
+
+				} else {
+					for (f=0; f<flightPath.length; f++) {
+						flightPath[f].setVisible(true);
+					}
+					for (f=0; f<marker.length; f++) {
+						marker[f].setVisible(true);
+					}
+					for (f=1; f<=all; f++) {
+						if(chek_infecon[f]==1) {
+							$('#searchbtn'+f).removeClass('btn-success');
+							$('#searchbtn'+f).addClass('btn-danger');
+							chek_infecon[f]=0;
+						}
+					}
+					gal=1;
+				}*/
+			});
+		}
+		function setlocation_daily (date) {
+			jQuery(function() {
+				var $ = jQuery;
+				//alert(num);
+				if(chek_daily[date]==0) {
+					console.log('#datebtn'+date);
+					document.getElementById('datebtn'+date).classList.remove('btn-danger');
+					document.getElementById('datebtn'+date).classList.add('btn-success');
+					$('#searchbtn_all_daily').removeClass('btn-success');
+					$('#searchbtn_all_daily').addClass('btn-danger');
+					chek_daily[date]=1;
+					all_daily = 0;
+				} else {
+					document.getElementById('datebtn'+date).classList.remove('btn-success');
+					document.getElementById('datebtn'+date).classList.add('btn-danger');
+					$('#datebtn'+date).removeClass('btn-success');
+					$('#datebtn'+date).addClass('btn-danger');
+					chek_daily[date]=0;
+				}
+				var f;
+				for (f=0; f<route.length; f++) {
+					marker[route[f].point1*1].setVisible(false);
+					marker[route[f].point2*1].setVisible(false);
+					flightPath[f].setVisible(false);
+				}
+				for (f=0; f<route.length; f++) {
+					if ((chek_daily[route[f].date]==1 || all_daily == 1) && (chek_infecon[route[f].person_num]==1 || all_infecon==1)) {
+						marker[route[f].point1*1].setVisible(true);
+						marker[route[f].point2*1].setVisible(true);
+						flightPath[f].setVisible(true);
+					}
+				}
+			});
+		}
+		function setlocation_all_infecon() {
+			all_infecon = 1;
+			$('#searchbtn_all_infecon').removeClass('btn-danger');
+			$('#searchbtn_all_infecon').addClass('btn-success');
+			for (f=0; f<route.length; f++) {
+				if (chek_daily[route[f].date]==1 || all_daily == 1) {
+					marker[route[f].point1*1].setVisible(true);
+					marker[route[f].point2*1].setVisible(true);
+					flightPath[f].setVisible(true);	
+				}
+			}
+			for (f=0; f<=all; f++) {
+				$('#searchbtn'+f).removeClass('btn-success');
+				$('#searchbtn'+f).addClass('btn-danger');
+				chek_infecon[f]=0;
+			}
+		}
+		
+		function setlocation_all_daily () {
+			all_daily = 1;
+			$('#searchbtn_all_daily').removeClass('btn-danger');
+			$('#searchbtn_all_daily').addClass('btn-success');
+			
+			for (f=0; f<route.length; f++) {
+				if (chek_infecon[route[f].person_num]==1 || all_infecon == 1) {
+					marker[route[f].point1*1].setVisible(true);
+					marker[route[f].point2*1].setVisible(true);
+					flightPath[f].setVisible(true);	
+				}
+			}
+			
+			var a, b, c, d, e, date;
+			firstday_day = 19;
+			firstday_month = 1;
+			firstday_year = 2020;
+			lastday_day = 19;
+			lastday_month = 2;
+			lastday_year = 2020;
+			for (d=firstday_year; d<=lastday_year; d++) {														//지금은 1년이상 넣을 일이 없지만 사태가 장기화된다면 이코드는 1년이상 넣을수 없으니 고치길
+				for (e=firstday_month; e<=lastday_month; e++) {
+					if (e>7) {												//달마다 일 갯수 구하기
+						c = 1;
+					} else {
+						c = 0;
+					}
+					if (e == lastday_month) {
+						b = lastday_day;
+					} else if (e%2 == c) {
+						if (e != 2) {
+							b = 30;
+						} else {
+							b = 28;
+						}
+					} else {
+						if (e != 2) {
+							b = 31;
+						} else {
+							b = 28;
+						}
+					}
+					for (a=firstday_day; a<=b; a++) {
+						date = d+"."+e+"."+a;
+						chek_daily[date] = 0;
+						document.getElementById('datebtn'+date).classList.remove('btn-success');
+						document.getElementById('datebtn'+date).classList.add('btn-danger');
+					}
+					firstday_day = 1;
+				}
+				firstday_month =1;
+			}
+		}
+		
+		
+		var togglein_infecon=0;
+		function droptoggle_infecon(num) {
+			if(togglein_infecon==0) {
+				$('#infeconshow').addClass('show');
+				$('#infeconshowbtn').addClass('show');
+				togglein_infecon=1;
+			} else {
+				$('#infeconshow').removeClass('show');
+				$('#infeconshowbtn').removeClass('show');
+				togglein_infecon=0;
+			}
+		}
+		var togglein_daily=0;
+		function droptoggle_daily(num) {
+			if(togglein_daily==0) {
+				$('#dailyshow').addClass('show');
+				$('#dailyshowbtn').addClass('show');
+				togglein_daily=1;
+			} else {
+				$('#dailyshow').removeClass('show');
+				$('#dailyshowbtn').removeClass('show');
+				togglein_daily=0;
+			}
+		}
+	</script>
+	<script>
+		var pg = 3;
+		for (var i = 2; i <= pg; i++) {
+			$('#m' + i).hide();
+		}
+		function cm(page) {
+			for (var i = 1; i <= pg; i++) {
+				if (i == page) {
+					$('#m' + i).show();
+					$('#mb' + i).addClass('sel');
+				} else {
+					$('#m' + i).hide();
+					$('#mb' + i).removeClass('sel');
+				}
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		if (screen.width <= 1440) {
+			document.location = "/static/mobile.html";
+		}
+	</script>
+
+</body>
+
+</html>

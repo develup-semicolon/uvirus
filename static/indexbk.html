@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157462309-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157462309-1');
+</script>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+	<link rel="stylesheet" href="jquery-jvectormap-2.0.1.css" type="text/css" media="screen" />
+	<link rel="stylesheet" media="all" href="https://germini.info/js/jqvmap/src/jquery-jvectormap.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<title>Coronavirus map</title>
+</head>
+
+<body>
+	<div class="header shadow mb-3">
+		<a class="logo">Coronavirus Map</a>
+		<input class="menu-btn" type="checkbox" id="menu-btn" />
+		<label class="menu-icon" for="menu-btn">
+			<span class="navicon"></span>
+		</label>
+		<ul class="menu">
+			<li>
+				<a href="/pc">한국 맵(PC)</a>
+			</li>
+			<li>
+				<a href="/m">한국 맵(MOBILE)</a>
+			</li>
+			<li>
+				<a href="/world">국제 맵</a>
+			</li>
+			<li>
+				<a href="https://vlioo.devent.kr/">중국 감염자 수 예측</a>
+			</li>
+			<li>
+				<a href="http://www.mohw.go.kr/react/popup_200128.html">선별 진료소 현황</a>
+			</li>
+			<li>
+				<a href="/about">세미콜론</a>
+			</li>
+		</ul>
+	</div>
+	<div class="row mx-3">
+
+		<div class="mapContainer col-md card mx-2 p-0 shadow mb-3">
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary text-danger">감염자 전체 맵 (실시간 업데이트)</h6>
+			</div>
+			<div class="mb-3" id="map1" style="height: 85%;"></div>
+		</div>
+
+		<div class="tableContainer col-md mx-2 mb-3 card shadow p-0">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-danger text-primary">세계 현황</h6>
+			</div>
+			<div class="card-body" style='overflow-y: scroll; height:100px'>
+				<table class="table table-bordered dataTable" id="dataTable">
+					<thead>
+						<tr>
+							<th class="w-auto text-nowrap" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">나라</th>
+							<th class="w-auto text-nowrap" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">감염자 수</th>
+							<th class="w-auto text-nowrap" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">사망자 수</th>
+							<th class="w-auto text-nowrap" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">치료자 수</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="information">
+		<div class="mx-3 row">
+			<div class="col-md card shadow mb-2 px-0 mx-2">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-danger text-primary">코로나바이러스란?</h6>
+				</div>
+				<div class="card-body">
+					코로나바이러스는 일반적인 감기에서 중증 호흡기 질환에 이르는 다양한 병증을
+야기하는 바이러스의 일종입니다. 신종 코로나바이러스는 지금까지 인간에게서
+발견되지 않은 새로운 종류의 바이러스입니다.
+				</div>
+			</div>
+
+			<div class="col-md card shadow mb-2 px-0 mx-2">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-danger text-primary">코로나바이러스 증상</h6>
+				</div>
+				<div class="card-body">
+					- 발열, 식욕감퇴, 구역 및 구토, 암갈색 소변, 권태감, 식욕부진, 복부 불쾌감, 황달 <br>
+- 6세 미만 소아에서 대부분 무증상(70%) <br>
+- 약 10%에게 황달이 발생 <br>
+- 연령이 높아질수록 70%이상 황달이 동반되며 증상이 심해짐 <br>
+				</div>
+			</div>
+			<div class="col-md card shadow mb-2 px-0 mx-2">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-danger text-primary">감염 예방하기</h6>
+				</div>
+				<div class="card-body">
+					- 손 자주 씻으며 외출 자제<br>
+					- 감기 증세나 구토, 열이 있을 경우 즉시 병원으로 갈 것<br>
+					- 병원에서 약을 받아도 나아지지 않으면 큰 병원으로 갈 것<br>
+					- 의심 증상이 나타나면, 즉시 <strong>1339</strong>로 전화 할 것 <br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mx-3">
+		<div class="col mx-2 p-0">
+
+			<div class="card my-2 shadow">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-danger text-primary">최근 뉴스</h6>
+				</div>
+				<div id="newsshow">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://germini.info/js/jqvmap/src/jquery-1.8.2.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-mousewheel.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/jvectormap.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/abstract-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/abstract-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/abstract-shape-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/svg-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-group-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-shape-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-path-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-circle-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-image-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-text-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/vml-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-group-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-shape-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-path-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-circle-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-image-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/map-object.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/region.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/marker.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/vector-canvas.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/simple-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/ordinal-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/numeric-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/color-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/legend.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/data-series.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/proj.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/map.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap-world-mill-en.js"></script>
+	<script>
+		jQuery(function() {
+			var $ = jQuery;
+			$.getJSON("/static/data/infectionData.json", function(data) {
+				//alert(data.infected["CN"]);
+				$('#map1').vectorMap({
+					map: 'world_mill_en',
+					panOnDrag: true,
+					focusOn: {
+						x: 0.5,
+						y: 0.5,
+						scale: 1,
+						animate: true
+					},
+					series: {
+						regions: [{
+							scale: ["#ecda9a", "#efc47e", "#f3ad6a", "#f7945d", "#f97b57", "#f66356", "#ee4d5a"],
+							normalizeFunction: 'polynomial',
+							values: data.infected
+						}]
+					},
+					onRegionTipShow: function(e, el, code) {
+						if (data.infected[code] == undefined ) {
+							el.html(el.html() + ' (감염 - ' + 0 + ')');
+						} else {
+							el.html(el.html() + ' (감염 - ' + data.infected[code] + ', 사망 - ' + data.death[code]+', 회복 - '+data.recoveries[code]+')');
+						}
+					},
+				});
+				for (var i=0; i<Object.keys(data.infected).length; i++){
+					$('#dataTable').append('<tr><td>'+data.ctrs[Object.keys(data.infected)[i]]+"</td><td>"+data.infected[Object.keys(data.infected)[i]]*1+"</td><td>"+data.death[Object.keys(data.death)[i]]*1+"</td><td>"+data.recoveries[Object.keys(data.recoveries)[i]]*1+"</td></tr>");
+				}
+			})
+			$.getJSON("/static/data/news.json", function(data) {
+				for (var i=0; i<Object.keys(data.title).length; i++){
+					$('#newsshow').append('<a href="'+data.url[Object.keys(data.url)[i]]+'" target="_blank"><div class="media text-muted"><p class="card-body media-body pb-3 mb-0 small lh-125 border-bottom border-gray"><strong class="d-block text-gray-dark">@'+data.sor[Object.keys(data.sor)[i]]+'</strong>'+data.title[Object.keys(data.title)[i]]+'</div></a>');
+				}
+			})
+		});
+	</script>
+
+</body>
+
+</html>

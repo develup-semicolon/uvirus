@@ -1,0 +1,321 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+		<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+		<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Coronavirus map</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" />
+
+		<link rel="stylesheet" href="jquery-jvectormap-2.0.1.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/static/css/adminlte.min.css" />
+		<link rel="stylesheet" media="all" href="https://germini.info/js/jqvmap/src/jquery-jvectormap.css" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<script src="https://germini.info/js/jqvmap/src/jquery-1.8.2.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/jquery-mousewheel.js"></script>
+
+		<script src="https://germini.info/js/jqvmap/src/jvectormap.js"></script>
+
+		<script src="https://germini.info/js/jqvmap/src/abstract-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/abstract-canvas-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/abstract-shape-element.js"></script>
+
+		<script src="https://germini.info/js/jqvmap/src/svg-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-group-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-canvas-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-shape-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-path-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-circle-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-image-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/svg-text-element.js"></script>
+
+		<script src="https://germini.info/js/jqvmap/src/vml-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/vml-group-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/vml-canvas-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/vml-shape-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/vml-path-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/vml-circle-element.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/vml-image-element.js"></script>
+
+		<script src="https://germini.info/js/jqvmap/src/map-object.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/region.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/marker.js"></script>
+
+		<script src="https://germini.info/js/jqvmap/src/vector-canvas.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/simple-scale.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/ordinal-scale.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/numeric-scale.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/color-scale.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/legend.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/data-series.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/proj.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/map.js"></script>
+		<script src="/static/js/map.js"></script>
+		<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap-world-mill-en.js"></script>
+	</head>
+	<body>
+		<ons-navigator id="appNavigator" swipe-target-width="80px">
+			<ons-page>
+				<ons-splitter id="appSplitter">
+					<ons-splitter-side id="sidemenu" page="sidemenu.html" side="right" collapse="" width="260px"></ons-splitter-side>
+					<ons-splitter-content page="tabbar.html"></ons-splitter-content>
+				</ons-splitter>
+			</ons-page>
+		</ons-navigator>
+
+		<template id="tabbar.html">
+		  <ons-page id="tabbar-page">
+			<ons-toolbar>
+			  <div class="center">Conronavirus Map</div>
+			  <div class="right">
+				<ons-toolbar-button onclick="fn.toggleMenu()">
+				  <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+				</ons-toolbar-button>
+			  </div>
+			</ons-toolbar>
+			<ons-tabbar id="appTabbar" position="auto">
+				<ons-tab label="지도" icon="ion-map" page="map.html" active></ons-tab>
+				<ons-tab label="뉴스" icon="ion-home" page="news.html"></ons-tab>
+			</ons-tabbar>
+
+			<script>
+			  ons.getScriptPage().addEventListener('prechange', function(event) {
+				if (event.target.matches('#appTabbar')) {
+				  event.currentTarget.querySelector('ons-toolbar .center').innerHTML = event.tabItem.getAttribute('label');
+				}
+			  });
+			</script>
+		  </ons-page>
+		</template>
+
+		<template id="sidemenu.html">
+			<ons-page>
+				<ons-list-title>메뉴</ons-list-title>
+				<ons-list>
+					<ons-list-item onclick="fn.loadView(0)">
+						<div class="left">
+							<ons-icon fixed-width class="list-item__icon" icon="ion-map, material:md-map"></ons-icon>
+						</div>
+						<div class="center">
+							지도
+						</div>
+					</ons-list-item>
+					<ons-list-item onclick="fn.loadView(1)">
+						<div class="left">
+							<ons-icon fixed-width class="list-item__icon" icon="ion-book, material:md-book"></ons-icon>
+						</div>
+						<div class="center">
+							뉴스
+						</div>
+					</ons-list-item>
+				</ons-list>
+
+				<script>
+				  ons.getScriptPage().onInit = function() {
+					// Set ons-splitter-side animation
+					this.parentElement.setAttribute('animation', ons.platform.isAndroid() ? 'overlay' : 'reveal');
+				  };
+				</script>
+
+				<style>
+				  .profile-pic {
+					width: 200px;
+					background-color: #fff;
+					margin: 20px auto 10px;
+					border: 1px solid #999;
+					border-radius: 4px;
+				  }
+
+				  .profile-pic > img {
+					display: block;
+					max-width: 100%;
+				  }
+
+				  ons-list-item {
+					color: #444;
+				  }
+				</style>
+			</ons-page>
+		</template>
+
+		<template id="map.html">
+			<ons-page>
+				<div id="map1" style="width: 100%; height: calc(100% - 40px);"></div>
+				<script src="https://maps.googleapis.com/maps/api/js?region=KR&key=AIzaSyAc2h4PifzInktgpkftPNKuuDP-1lNzFvU&callback=initMap"></script>
+				<div id="searchbtn_map" class="btnsr">
+					<p><button class="btn btn-success srbtns" onclick="setlocation_all()" id="searchbtn_all">전체</button></p>
+					<p><button class="btn btn-danger srbtns" onclick="setlocation(0)" id="searchbtn0">교민</button></p>
+				</div>
+				
+				<style>
+					::-webkit-scrollbar {
+						width: 5px;
+						height: 5px;
+					}
+
+					/* Track */
+					::-webkit-scrollbar-track {
+					  background: gray;
+					}
+
+					/* Handle */
+					::-webkit-scrollbar-thumb {
+					  background: black;
+					}
+
+					/* Handle on hover */
+					::-webkit-scrollbar-thumb:hover {
+					  background: black;
+					}
+					
+					.btnsr {
+						display: flex;
+						justify-content: flex-start;
+						overflow-x: scroll;
+						height: 40px;
+					}
+
+					.srbtns {
+						width: 70px !important;
+						height: 35px !important;
+						border-radius:0px;
+					}
+				</style>
+				<script src="/static/js/map.js"></script>
+				<script>
+					var chek=new Array();
+					var f;
+					function setlocation (num) {
+						jQuery(function() {
+							var $ = jQuery;
+							//alert(num);
+							if(chek[num]==0) {
+								$('#searchbtn'+num).removeClass('btn-danger');
+								$('#searchbtn'+num).addClass('btn-success');
+								$('#searchbtn_all').removeClass('btn-success');
+								$('#searchbtn_all').addClass('btn-danger');
+								chek[num]=1;
+							} else {
+								$('#searchbtn'+num).removeClass('btn-success');
+								$('#searchbtn'+num).addClass('btn-danger');
+								chek[num]=0;
+							}
+							var f;
+							for (f=0; f<route.length; f++) {
+								marker[route[f].point1*1].setVisible(false);
+								marker[route[f].point2*1].setVisible(false);
+								flightPath[f].setVisible(false);
+							}
+							for (f=0; f<route.length; f++) {
+								if(chek[route[f].person_num]==1) {
+									marker[route[f].point1*1].setVisible(true);
+									marker[route[f].point2*1].setVisible(true);
+									flightPath[f].setVisible(true);
+								}
+							}
+						});
+					}
+
+					function setlocation_all() {
+						jQuery(function() {
+							var $ = jQuery;
+							$('#searchbtn_all').removeClass('btn-danger');
+							$('#searchbtn_all').addClass('btn-success');
+							for (f=0; f<route.length; f++) {
+								marker[route[f].point1*1].setVisible(true);
+								marker[route[f].point2*1].setVisible(true);
+								flightPath[f].setVisible(true);
+							}
+							for (f=0; f<=all; f++) {
+								$('#searchbtn'+f).removeClass('btn-success');
+								$('#searchbtn'+f).addClass('btn-danger');
+								chek[f]=0;
+							}
+						});
+					}
+					
+					jQuery(function() {
+						var $ = jQuery;
+						for (f=1; f<=all; f++) {
+							chek[f]=0;
+							$('#searchbtn_map').append('<p><button id="searchbtn'+f+'" class="searchbtns btn btn-danger btn-block srbtns" onclick="setlocation('+f+')">'+f+'</button></p>');
+						}
+					});
+				</script>
+			</ons-page>
+		</template>
+		
+		<template id="news.html">
+			<ons-page>
+				<div id="newsshow">
+				</div>
+				
+				<style>
+				  .intro {
+					text-align: center;
+					padding: 0 20px;
+					margin-top: 40px;
+				  }
+
+				  ons-card {
+					cursor: pointer;
+					color: #333;
+				  }
+
+				  .card__title,
+				  .card--material__title {
+					font-size: 20px;
+				  }
+				</style>
+				<script>
+					jQuery(function() {
+						var $ = jQuery;
+						$.getJSON("/static/data/news.json", function(data) {
+							for (var i = 0; i < Object.keys(data.title).length; i++) {
+								//$('#newsshow').append('<a href="' + data.url[Object.keys(data.url)[i]] + '" target="_blank"><div class="media text-muted"><p class="card-body media-body pb-3 mb-0 small lh-125 border-bottom border-gray"><strong class="d-block" style="color:black;">@' + data.sor[Object.keys(data.sor)[i]] + '</strong><span style="color:black;">' + data.title[Object.keys(data.title)[i]] + '</span></div></a>');
+								$('#newsshow').append('<a href="'+data.url[Object.keys(data.url)[i]]+'" target="_blank"><ons-card><div class="title">@'+data.sor[Object.keys(data.sor)[i]]+'</div><div class="content">'+data.title[Object.keys(data.title)[i]]+'</div></ons-card></a>');
+							}
+						})
+					});
+				</script>
+			</ons-page>
+		</template>
+		
+		<style>
+		  ons-splitter-side[animation=overlay] {
+			border-left: 1px solid #bbb;
+		  }
+		</style>
+		<script>
+			window.fn = {};
+			window.fn.toggleMenu = function () {
+			  document.getElementById('appSplitter').right.toggle();
+			};
+
+			window.fn.loadView = function (index) {
+			  document.getElementById('appTabbar').setActiveTab(index);
+			  document.getElementById('sidemenu').close();
+			};
+
+			window.fn.loadLink = function (url) {
+			  window.open(url, '_blank');
+			};
+
+			window.fn.pushPage = function (page, anim) {
+			  if (anim) {
+				document.getElementById('appNavigator').pushPage(page.id, { data: { title: page.title }, animation: anim });
+			  } else {
+				document.getElementById('appNavigator').pushPage(page.id, { data: { title: page.title } });
+			  }
+			};
+		</script>
+	</body>
+</html>

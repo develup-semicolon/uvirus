@@ -1,0 +1,274 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157462309-1%22%3E"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-157462309-1');
+</script>
+<!DOCTYPE html>
+<html lang="en">
+	
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Coronavirus map</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" />
+	<link rel="stylesheet" href="/static/css/mobilestyle.css" />
+
+	<link rel="stylesheet" href="jquery-jvectormap-2.0.1.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/static/css/adminlte.min.css" />
+	<link rel="stylesheet" media="all" href="https://germini.info/js/jqvmap/src/jquery-jvectormap.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<script src="https://germini.info/js/jqvmap/src/jquery-1.8.2.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-mousewheel.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/jvectormap.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/abstract-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/abstract-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/abstract-shape-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/svg-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-group-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-shape-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-path-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-circle-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-image-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-text-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/vml-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-group-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-shape-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-path-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-circle-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-image-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/map-object.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/region.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/marker.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/vector-canvas.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/simple-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/ordinal-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/numeric-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/color-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/legend.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/data-series.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/proj.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/map.js"></script>
+	<script src="/static/js/map.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap-world-mill-en.js"></script>
+	<link rel="stylesheet" href="/static/css/style.css" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<style>
+		.dataMenu {
+			font-size: 15px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header mb-3">
+		<a class="logo">Coronavirus Map</a>
+		<input class="menu-btn" type="checkbox" id="menu-btn" />
+		<label class="menu-icon" for="menu-btn">
+			<span class="navicon"></span>
+		</label>
+		<ul class="menu">
+			<li>
+				<a href="/">한국 맵</a>
+			</li>
+			<li>
+				<a href="/world">국제 맵</a>
+			</li>
+			<li>
+				<a href="https://vlioo.devent.kr/">중국 감염자 수 예측</a>
+			</li>
+			<li>
+				<a href="http://www.mohw.go.kr/react/popup_200128.html">선별 진료소 현황</a>
+			</li>
+			<li>
+				<a href="/about">세미콜론</a>
+			</li>
+		</ul>
+	</div>
+	<div class="d-flex">
+		<a class="text-nowrap text-center dataMenu flex-fill" onclick="bck(1);" href="#">한국자료</a>
+		<a class="text-nowrap text-center dataMenu flex-fill" onclick="bck(2);" href="#">세계자료</a>
+		<a class="text-nowrap text-center dataMenu flex-fill" onclick="bck(3);" href="#">관련뉴스</a>
+		<a class="text-nowrap text-center dataMenu flex-fill" onclick="bck(4);" href="#">관련정보</a>
+	</div>
+	<hr>
+	<div class="container">
+		<div id="m1" class="row">
+			<div class="col text-center">
+				<h5>감염자</h5>
+				<h2 class="num" id="krConfirmed">0</h2>
+			</div>
+			<div class="col text-center">
+				<h5>증상자</h5>
+				<h2 class="num" id="krScan">0</h2>
+			</div>
+			<div class="col text-center">
+				<h5>사망자</h5>
+				<h2 class="num" id="krdeath">0</h2>
+			</div>
+			<div class="col text-center">
+				<h5>치료자</h5>
+				<h2 class="num" id="kdrecovery">0</h2>
+			</div>
+		</div>
+		<div id="m2" class="row">
+			<div class="col text-center">
+				<h5>감염자</h5>
+				<h2 class="num" id="totalconfirmed">0</h2>
+			</div>
+			<div class="col text-center">
+				<h5>사망자</h5>
+				<h2 class="num" id="totaldeath">0</h2>
+			</div>
+			<div class="col text-center">
+				<h5>치료자</h5>
+				<h2 class="num" id="totalrecovered">0</h2>
+			</div>
+		</div>
+
+		<div id="m3" class="row">
+			<div class="col">
+				<div id="newsshow" class="reload"></div>
+			</div>
+		</div>
+		<div id="m4" class="row">
+			<div class="col">
+				<div class="h4 mx-3">
+					코로나바이러스란?
+				</div>
+				<p class="mx-3">
+					코로나 바이러스는 광범위한 호흡기 및 소화기 감염을 일으키는 RNA 바이러스로 일반 감기, 중증급성호흡기증후군 및 중동호흡기증후군과 같은 질환을 유발할 수 있습니다.
+					<br> 코로나 바이러스의 전파 경로는 매우 다양합니다. 비단 감염자와의 밀접한 접촉이 없더라도 가벼운 일상 생활을 통해서 감염될 수도 있습니다.
+					<p>
+						<br>
+						<div class="h4 mx-3">
+							코로나바이러스 증상
+						</div>
+						<p class="mx-3">
+							- 발열, 식욕감퇴, 구역 및 구토, 암갈색 소변, 권태감, 식욕부진, 복부 불쾌감, 황달
+							<br> - 6세 미만 소아에서 대부분 무증상(70%)
+							<br> - 약 10%에게 황달이 발생
+							<br> - 연령이 높아질수록 70%이상 황달이 동반되며 증상이 심해짐
+							<br>
+						</p>
+						<br>
+						<div class="h4 mx-3">
+							감염 예방하기
+						</div>
+						<p class="mx-3">
+							<br> - 손 자주 씻으며 외출 자제
+							<br> - 감기 증세나 구토, 열이 있을 경우 즉시 병원으로 갈 것
+							<br> - 병원에서 약을 받아도 나아지지 않으면 큰 병원으로 갈 것
+							<br> - 의심 증상이 나타나면, 즉시
+							<strong>1339</strong>로 전화 할 것
+							<br>
+						</p>
+			</div>
+		</div>
+	</div>
+
+	<hr style="margin-bottom: 0;">
+
+	<div id="map1" style="width: 100%; height: calc(100% - 240px);"></div>
+	<script src="https://maps.googleapis.com/maps/api/js?region=KR&key=AIzaSyAc2h4PifzInktgpkftPNKuuDP-1lNzFvU&callback=initMap"></script>
+	<div id="marker_inform">
+		<div>
+			<img src="/static/img/blue.png">: 불확실한 정보</div>
+		<div>
+			<img src="/static/img/red.png">: 정부제공 자료</div>
+	</div>
+	
+	<script>
+		var pg = 4;
+		for (var i = 2; i <= pg; i++) {
+			$('#m' + i).hide();
+		}
+
+		function bck(bttp) {
+			for (var i = 1; i <= pg; i++) {
+				if (i == bttp) {
+					$('#m' + i).show();
+					$('#mb' + i).addClass('sel');
+				} else {
+					$('#m' + i).hide();
+					$('#mb' + i).removeClass('sel');
+				}
+			}
+			if (bttp == 1 || bttp == 2) {
+				$('#map1').show();
+				$('#marker_inform').show();
+			} else {
+				$('#map1').hide();
+				$('#marker_inform').hide();
+			}
+		}
+	</script>
+	<script>
+		$(document).ready(function () {
+			dataload();
+		})
+		function dataload() {
+			var deathct = 0;
+			var confct = 0;
+			var recct = 0;
+			var krConfirmed = 0;
+			var krScan = 0;
+			jQuery(function() {
+				var $ = jQuery;
+				$.getJSON("/static/data/infectionData.json", function(data) {
+					for (var i = 0; i < Object.keys(data.death).length; i++)
+						deathct = deathct + data.death[Object.keys(data.death)[i]] * 1;
+					for (var i = 0; i < Object.keys(data.infected).length; i++) {
+						confct = confct + data.infected[Object.keys(data.infected)[i]] * 1;
+						$('#confirmedcr').append("<tr><td>" + Object.keys(data.infected)[i] + "</td><td>" + data.infected[Object.keys(data.infected)[i]] * 1 + "</td></tr>");
+					}
+					for (var i = 0; i < Object.keys(data.recoveries).length; i++) {
+						recct = recct + data.recoveries[Object.keys(data.recoveries)[i]] * 1;
+					}
+					$('#totaldeath').text(deathct);
+					$('#totalconfirmed').text(confct);
+					$('#totalrecovered').text(recct);
+					$('#krConfirmed').text(data.infected.KR);
+					$('#krdeath').text(data.death.KR);
+					$('#kdrecovery').text(data.recoveries.KR);
+					//alert(data.infected["CN"]);
+					$('#krinfo').text(data.recoveries)
+					
+				})
+				$.getJSON("/static/data/news.json", function(data) {
+					for (var i = 0; i < Object.keys(data.title).length; i++) {
+						$('#newsshow').append('<a href="' + data.url[Object.keys(data.url)[i]] + '" target="_blank"><div class="media text-muted"><p class="card-body media-body pb-3 mb-0 small lh-125 border-bottom border-gray"><strong class="d-block" style="color:black;">@' + data.sor[Object.keys(data.sor)[i]] + '</strong><span style="color:black;">' + data.title[Object.keys(data.title)[i]] + '</span></div></a>');
+					}
+				})
+				$.getJSON("/static/data/koreainfo.json", function(data) {
+					for (var i = 0; i < Object.keys(data.koreainfo).length; i++) {
+						$('#koreainfotable').append('<tr><td>' + Object.keys(data.koreainfo)[i] + '</td><td>' + data.koreainfo[Object.keys(data.koreainfo)[i]] + '</td></tr>');
+					}
+					$('#krScan').text(data.koreainfo.조사대상유증상자);
+				})
+			});
+		}
+	</script>
+</body>
+
+</html>

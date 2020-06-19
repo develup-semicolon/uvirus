@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: gray;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
+
+body {
+	padding: 0px;
+	background-color: white;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.mapContainer {
+	height: 30rem;
+}
+
+.page-title {
+	font-weight: bolder;
+}
+
+.mixbox {
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
+}
+
+#map_inform {
+	position: fixed;
+	display: none;
+	width: 200px;
+	background: white;
+	border: 3px solid gray;
+	border-radius: 20px 0px 20px 0px;
+	text-align: center;
+	color: black;
+	margin-left:10px;
+}
+
+#marker_inform {
+	position: relative;
+	width: 200px;
+	text-align: center;
+	background-color: lightgray;
+	border-radius: 10px 10px 10px 10px;
+	z-index: 2;
+	bottom: 140px;
+	color: black;
+	opacity:80%;
+	padding:4px;
+}
+
+h1 {
+	margin: 0px;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.cont {
+	width: 100%;
+	height: calc(100% - 70px);
+	padding: 0px;
+	margin: 0px;
+	display: inline-flex;
+}
+
+.num {
+	color: black;
+}
+
+.nosel {
+	background-color:red;
+}
+
+.yessel {
+	background-color:green;
+}
+
+/*new모바일 디자인*/
+.newmobilenavbar {
+	height: 65px;
+	margin:0px;
+}
+
+.newmobilecont {
+	height:calc(100% - 65px);
+}
+
+.newmobileexmenu {
+	height:50px;
+}
+
+.newnavexmenubt {
+	margin:auto;
+	color: black;
+}
+
+.selt {
+	background-color: lightgray;
+	border-radius: 20px;
+	padding: 5px;
+}
+
+/* header */
+
+.header {
+	display: inline-block;
+	background-color: #fff;
+	box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+	width: 100%;
+	z-index: 3;
+}
+
+.header ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.header li a {
+	display: block;
+	padding: 20px 20px;
+	border-right: 1px solid #f4f4f4;
+	text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+	background-color: #f4f4f4;
+}
+
+
+
+.header .logo {
+	display: block;
+	float: left;
+	font-size: 1.5em;
+	padding-top: 16px;
+	padding-left: 25px;
+	text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+	clear: both;
+	max-height: 0;
+	transition: max-height 0.2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+	cursor: pointer;
+	display: inline-block;
+	float: right;
+	padding: 35px 20px;
+	position: relative;
+	user-select: none;
+	margin-bottom: 0;
+}
+
+.header .menu-icon .navicon {
+	background: #333;
+	display: block;
+	height: 2px;
+	position: relative;
+	transition: background 0.2s ease-out;
+	width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+	background: #333;
+	content: '';
+	display: block;
+	height: 100%;
+	position: absolute;
+	transition: all 0.2s ease-out;
+	width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+	top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+	top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+	display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+	max-height: 320px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+	background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+	transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+	transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+	top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 49em) {
+	.header li {
+		float: left;
+	}
+	.header li a {
+		padding: 20px 30px;
+	}
+	.header .menu {
+		clear: none;
+		float: right;
+		max-height: none;
+	}
+	.header .menu-icon {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.mapContainer {
+		height: 25rem;
+	}
+	.tableContainer {
+		height: 30rem;
+	}
+
+.infotitle {
+	text-align:center;
+}
+
+.infocont {	
+	padding:5px;
+}
+
+.customnav {
+	vertical-align: middle;
+}
+
+.row:before, .row:after {display: inline-block !important;}

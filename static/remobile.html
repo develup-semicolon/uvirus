@@ -1,0 +1,573 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157462309-1%22%3E"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-157462309-1');
+</script>
+<!DOCTYPE html>
+<html lang="en">
+	
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Uvirus Map</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" />
+
+	<link rel="stylesheet" href="jquery-jvectormap-2.0.1.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/static/css/adminlte.min.css" />
+	<link rel="stylesheet" media="all" href="https://germini.info/js/jqvmap/src/jquery-jvectormap.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	
+	<script src="https://germini.info/js/jqvmap/src/jquery-1.8.2.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-mousewheel.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/jvectormap.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/abstract-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/abstract-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/abstract-shape-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/svg-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-group-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-shape-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-path-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-circle-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-image-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/svg-text-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/vml-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-group-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-canvas-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-shape-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-path-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-circle-element.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/vml-image-element.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/map-object.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/region.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/marker.js"></script>
+
+	<script src="https://germini.info/js/jqvmap/src/vector-canvas.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/simple-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/ordinal-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/numeric-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/color-scale.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/legend.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/data-series.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/proj.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/map.js"></script>
+	<script src="/static/js/map.js"></script>
+	<script src="https://germini.info/js/jqvmap/src/jquery-jvectormap-world-mill-en.js"></script>
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<link rel="stylesheet" href="/static/css/newstyle.css" />
+	<link rel="stylesheet" href="/static/css/fontawesome/css/all.css" />
+	<link rel="stylesheet" href="/static/css/fontawesome/js/all.js" />
+</head>
+<body>
+	<div class="newnav" class="shadow-sm">
+		<div style='margin:0px; padding:0px; display:inline-block; height:50px; padding:5px;'>
+			<button class="btn" style="height:40px; color:white; color:black;" onclick='navmntoggle()'>
+				<i class="fas fa-bars"></i>
+			</button>
+		</div>
+		<div style='padding:5px; display:inline-block; font-size:26px; height:50px; margin:0px; position:absolute;left:45px;'>
+			Uvirus Map
+		</div>
+		<div class="navmn shadow">
+			<table class="table table-borderless" style='color:white;'>
+				<tr>
+					<th><a href="/">한국 맵</a></th>
+				</tr>
+				<tr>
+					<th><a href="/world">국제 맵</a></th>
+				</tr>
+				<tr>
+					<th><a href="https://vlioo.devent.kr/">중국 감염자 수 예측</a></th>
+				</tr>
+				<tr>
+					<th><a href="http://www.mohw.go.kr/react/popup_200128.html">선별 진료소 현황</a></th>
+				</tr>
+				<tr>
+					<th><a href="/about">세미콜론</a></th>
+				</tr>
+			</table>
+		</div>
+		<script>
+			$('.navmn').hide();
+			function navmntoggle() {
+				$('.navmn').toggle(300);
+			}
+		</script>
+	</div>
+	
+	<div class="maincont">
+		<button onClick="window.location.reload()" class="reflashbtn btn btn-primary shadow">
+			<i class="fas fa-redo-alt"></i>
+		</button>
+		<button onClick="extoggle('exnews')" class="newsbtn btn btn-primary shadow">
+			<i class="far fa-newspaper"></i>
+		</button>
+		<button onClick="extoggle('exinfo')" class="infobtn btn btn-primary shadow">
+			<i class="fas fa-info"></i>
+		</button>
+		<button onClick="extoggle('exmaker')" class="makerbtn btn btn-primary shadow">
+			<i class="far fa-map-marker-question"></i>
+		</button>
+		
+		<div class="exmaker">
+			<img src="/static/img/blue.png">불확실한정보<br>
+			<img src="/static/img/red.png">정부제공자료<br>
+			<img src="/static/img/green.png">병원
+		</div>
+		
+		<div class="exnews">
+			<p style='font-size:20px;'>
+				뉴스
+			</p>
+			<div id="newsshow" style='overflow-y:scroll; height:calc(100% - 50px);'></div>
+		</div>
+		
+		<div class="exinfo">
+			<p style='font-size:20px;'>
+				정보
+			</p>
+			<div id="newsshow" style='overflow-y:scroll; height:calc(100% - 30px);'>
+				<div class="h4 mx-3">
+					코로나바이러스란?
+				</div>
+				<p class="mx-3">
+					코로나 바이러스는 광범위한 호흡기 및 소화기 감염을 일으키는 RNA 바이러스로 일반 감기, 중증급성호흡기증후군 및 중동호흡기증후군과 같은 질환을 유발할 수 있습니다.
+				<br> 코로나 바이러스의 전파 경로는 매우 다양합니다. 비단 감염자와의 밀접한 접촉이 없더라도 가벼운 일상 생활을 통해서 감염될 수도 있습니다.
+				<p>
+				<br>
+				<div class="h4 mx-3">
+					코로나바이러스 증상
+				</div>
+				<p class="mx-3">
+					- 발열, 식욕감퇴, 구역 및 구토, 암갈색 소변, 권태감, 식욕부진, 복부 불쾌감, 황달
+					<br> - 6세 미만 소아에서 대부분 무증상(70%)
+					<br> - 약 10%에게 황달이 발생
+					<br> - 연령이 높아질수록 70%이상 황달이 동반되며 증상이 심해짐
+					<br>
+				</p>
+				<br>
+				<div class="h4 mx-3">
+					감염 예방하기
+				</div>
+				<p class="mx-3">
+					- 손 자주 씻으며 외출 자제
+					<br> - 감기 증세나 구토, 열이 있을 경우 즉시 병원으로 갈 것
+					<br> - 병원에서 약을 받아도 나아지지 않으면 큰 병원으로 갈 것
+					<br> - 의심 증상이 나타나면, 즉시
+					<strong>1339</strong>로 전화 할 것
+					<br>
+				</p>
+			</div>
+		</div>
+		
+		<div class="makerinfo shadow-sm">
+			<div style='display:flex; height:30px'>
+				<button style='flex:1;' class="btn" onclick="markerex()">
+					<i class="fas fa-sort-up" id="mkexbtnt"></i>
+				</button>
+				<button onclick="markerhide()" class="btn">
+					<i class="fal fa-times-circle"></i>
+				</button>
+			</div>
+			<p class="makerlocation">
+				
+			</p>
+		</div>
+		
+		<div class="makerexinfo" style="color:black;">
+			<p style='font-size:20px;' id="mvshow">
+			</p>
+			<table id="makerexinfocont" class="display table-bordered" style="width:100%; color:black;">
+				<thead>
+					<tr>
+						<th>확진자</th>
+						<th>일시</th>
+					</tr>
+				</thead>
+				<tbody id="mkexshow">
+					<tr><td>오류</td><td>알수없는</td></tr>
+				</tbody>
+				<script>
+					function showtable() {
+						var last_pnum = "";
+						var last_day = "";
+						$('#mkexshow').empty();
+						$('#mvshow').text(marker[fulpoint].title+"을 경유하였거나 방문한 확진자");
+						for(var i=0;i<route.length;i++) {
+							if(route[i].point2==fulpoint||route[i].point1==fulpoint) {
+								if (last_pnum != route[i].person_num && last_day != route[i].date) {
+									last_pnum = route[i].person_num;
+									last_day = route[i].date;
+									$('#mkexshow').append('<tr><td>'+route[i].person_num+'</td><td>'+route[i].date+'</td></tr>');
+								}
+							}
+						}
+					}
+				</script>
+			</table>
+		</div>
+		
+		<script>
+			$('.exmaker').hide();
+			$('.exnews').hide();
+			$('.exinfo').hide();
+			$('.makerexinfo').hide();
+			var page=0;
+			var extogglest=0;
+			function extoggle(what) {
+				if(page==0) {
+					$('.'+what).slideToggle(300);
+					page=what
+				} else if(what=="allhide") {
+					$('.'+page).slideToggle(300);
+					page=0;
+				} else if(what==page) {
+					$('.'+what).slideToggle(300);
+					page=0;
+				} else {
+					$('.'+what).slideToggle(300);
+					$('.'+page).slideToggle(300);
+					page=what;
+				}
+				
+			}
+		</script>
+		
+		<script>
+			var makck=0;
+			var fulpoint=0;
+			$('.makerinfo').hide();
+			function click(what) {
+				
+				
+				$('.makerlocation').text(marker[what].title);
+				if(makck==1) {
+					$('.makerinfo').hide();
+					dwmak(fulpoint);
+				}
+				fulpoint=what;
+				extoggle('allhide');
+				$('.makerinfo').slideToggle(300);
+				makck=1;
+				upmak(fulpoint);
+			}
+			function markerhide() {
+				
+				makck=0;
+				if(extogglest==1) {
+					setTimeout(function() {
+						$('.makerinfo').slideToggle(300);
+					}, 200);
+					$('.makerexinfo').slideToggle(300);
+					$('#mkexbtnt').addClass('fa-sort-up');
+					$('#mkexbtnt').removeClass('fa-sort-down');
+					$('.makerinfo').removeClass('bdrdrm');
+					extogglest=0;
+				} else {
+					$('.makerinfo').slideToggle(300);
+				}
+				dwmak(fulpoint);
+			}
+			function markerex() {
+				if(extogglest==0) {
+					extogglest=1;
+					$('#mkexbtnt').removeClass('fa-sort-up');
+					$('#mkexbtnt').addClass('fa-sort-down');
+					$('.makerinfo').addClass('bdrdrm');
+					showtable();
+				} else {
+					extogglest=0;
+					$('#mkexbtnt').addClass('fa-sort-up');
+					$('#mkexbtnt').removeClass('fa-sort-down');
+					$('.makerinfo').removeClass('bdrdrm');
+				}
+				$('.makerexinfo').slideToggle(300);
+			}
+		</script>
+		
+		<div id="map1" style="width: 100%; height: calc(100% - 70px);"></div>
+		<script src="https://maps.googleapis.com/maps/api/js?region=KR&key=AIzaSyAc2h4PifzInktgpkftPNKuuDP-1lNzFvU&callback=initMap"></script>
+		<div id="searchbtn_map_infecon" class="btnsr">
+			<p><button class="btn btn-success srbtns_long" onclick="setlocation_all_infecon()" id="searchbtn_all_infecon">전체환자</button></p>
+			<p><button class="btn btn-danger srbtns_long" onclick="setlocation_infecon(0)" id="searchbtn0">교민</button></p>
+			<!--<p><button class="btn btn-danger srbtns_long" onclick="setlocation_infecon('전남2')" id="searchbtn전남2">전남2</button></p>-->
+		</div>
+		<div id="searchbtn_map_daily" class="btnsr">
+			<p><button class="btn btn-success srbtns_long" onclick="setlocation_all_daily()" id="searchbtn_all_daily">모든날짜</button></p>
+		</div>
+		<div class="smallinfo shadow-sm">
+			치료자
+			<h2 class="num" id="kdrecovery">0</h2>
+			<hr>
+			증상자
+			<h2 class="num" id="krScan">0</h2>
+			<hr>
+			사망자
+			<h2 class="num" id="krdeath">0</h2>
+			<hr>
+			확진자
+			<h2 class="num" id="krConfirmed">0</h2>
+			<button class="btn" onclick='togglesmallinfo()' style='width:100%'>
+				<i class="fas fa-sort-down" id="smtgmnic"></i>
+			</button>
+			<script>
+				var smtgck=0;
+				function togglesmallinfo() {
+					if(smtgck==0) {
+						$('.smallinfo').addClass('smallinfoex');
+						$('#smtgmnic').addClass('fa-sort-up');
+						$('#smtgmnic').removeClass('fa-sort-down');
+						smtgck=1;
+					} else {
+						$('.smallinfo').removeClass('smallinfoex');
+						$('#smtgmnic').removeClass('fa-sort-up');
+						$('#smtgmnic').addClass('fa-sort-down');
+						smtgck=0;
+					}
+				}
+			</script>
+		</div>
+	</div>
+	
+	<script>
+		var chek_infecon=new Array();
+		var chek_daily={};
+		var all_infecon = 1;
+		var all_daily = 1;
+		var deathct = 0;
+		var confct = 0;
+		var recct = 0;
+		var krConfirmed = 0;
+		var krScan = 0;
+		mobile = 1;
+		jQuery(function() {
+			var $ = jQuery;
+      
+			$.getJSON("/static/data/infectionData.json", function(data) {
+				for (var i = 0; i < Object.keys(data.death).length; i++)
+					deathct = deathct + data.death[Object.keys(data.death)[i]] * 1;
+				for (var i = 0; i < Object.keys(data.infected).length; i++) {
+					confct = confct + data.infected[Object.keys(data.infected)[i]] * 1;
+					$('#confirmedcr').append("<tr><td>" + data.ctrs[Object.keys(data.ctrs)[i]] + "</td><td>" + data.infected[Object.keys(data.infected)[i]] * 1 + "</td><td>"+data.death[Object.keys(data.death)[i]] * 1+"</td><td>"+data.recoveries[Object.keys(data.recoveries)[i]] * 1 +"</td></tr>");
+				}
+				for (var i = 0; i < Object.keys(data.recoveries).length; i++) {
+					recct = recct + data.recoveries[Object.keys(data.recoveries)[i]] * 1;
+				}
+				$('#totaldeath').text(deathct);
+				$('#totalconfirmed').text(confct);
+				$('#totalrecovered').text(recct);
+				$('#krConfirmed').text(data.infected.KR);
+				$('#krdeath').text(data.death.KR);
+				$('#kdrecovery').text(data.recoveries.KR);
+				//alert(data.infected["CN"]);
+				$('#krinfo').text(data.recoveries)
+				
+			})
+			$.getJSON("/static/data/news.json", function(data) {
+				for (var i = 0; i < Object.keys(data.title).length; i++) {
+					$('#newsshow').append('<a href="' + data.url[Object.keys(data.url)[i]] + '" target="_blank"><div class="media text-muted"><p class="card-body media-body pb-3 mb-0 small lh-125 border-bottom border-gray"><strong class="d-block" style="color:black;">@' + data.sor[Object.keys(data.sor)[i]] + '</strong><span style="color:black;">' + data.title[Object.keys(data.title)[i]] + '</span></div></a>');
+				}
+			})
+			$.getJSON("/static/data/koreainfo.json", function(data) {
+				for (var i = 0; i < Object.keys(data.koreainfo).length; i++) {
+					$('#koreainfotable').append('<tr><td>' + Object.keys(data.koreainfo)[i] + '</td><td>' + data.koreainfo[Object.keys(data.koreainfo)[i]] + '</td></tr>');
+				}
+				$('#krScan').text(data.koreainfo.조사대상유증상자);
+			})
+			console.log("BEGIN");
+          console.log(isEmpty); //여기에 map.js 에 있는 데이터가 받아지는게 아닌거같은데요? 어떤 데이터를 지금 저는 map.js랑 변수를 공유해야해서요.. 공유되야 정상 아닌가요? 음 공유되고 있는거 같은데
+			chek_infecon[0]=0; 
+			
+			var a, b, c, d, e, date;
+				for (d=firstday_year; d<=lastday_year; d++) {								//지금은 1년이상 넣을 일이 없지만 사태가 장기화된다면 이코드는 1년이상 넣을수 없으니 고치길
+					for (e=firstday_month; e<=lastday_month; e++) {
+						if (e>7) {												//달마다 일 갯수 구하기
+							c = 1;
+						} else {
+							c = 0;
+						}
+						if (e == lastday_month) {
+							b = lastday_day;
+						} else if (e%2 == c) {
+							if (e != 2) {
+								b = 30;
+							} else {
+								b = 28;
+							}
+						} else {
+							if (e != 2) {
+								b = 31;
+							} else {
+								b = 28;
+							}
+						}
+						for (a=firstday_day; a<=b; a++) {
+							date = d+"."+e+"."+a;
+							chek_daily[date] = 0;
+							$('#searchbtn_map_daily').append(`<div><button id="datebtn${date}" class="searchbtns btn btn-danger btn-block srbtns_long" onclick="setlocation_daily('${date}')">${date}</button></div>`);
+						}
+						firstday_day = 1;
+					}
+					firstday_month =1;
+				}
+		});
+		
+		function setlocation_infecon (num) {
+			jQuery(function() {
+				var $ = jQuery;
+				//alert(num);
+				if(chek_infecon[num]==0) {
+					$('#searchbtn'+num).removeClass('btn-danger');
+					$('#searchbtn'+num).addClass('btn-success');
+					$('#searchbtn_all_infecon').removeClass('btn-success');
+					$('#searchbtn_all_infecon').addClass('btn-danger');
+					all_infecon = 0;
+					chek_infecon[num]=1;
+				} else {
+					$('#searchbtn'+num).removeClass('btn-success');
+					$('#searchbtn'+num).addClass('btn-danger');
+					chek_infecon[num]=0;
+				}
+				var f;
+				for (f=0; f<route.length; f++) {
+					marker[route[f].point1*1].setVisible(false);
+					marker[route[f].point2*1].setVisible(false);
+					flightPath[f].setVisible(false);
+				}
+				for (f=0; f<route.length; f++) {
+					if((chek_daily[route[f].date]==1 || all_daily == 1) && (chek_infecon[route[f].person_num]==1 || all_infecon==1)) {
+						marker[route[f].point1*1].setVisible(true);
+						marker[route[f].point2*1].setVisible(true);
+						flightPath[f].setVisible(true);
+					}
+				}
+			});
+		}
+		
+		function setlocation_daily (date) {
+			jQuery(function() {
+				var $ = jQuery;
+				//alert(num);
+				if(chek_daily[date]==0) {
+					console.log('#datebtn'+date);
+					document.getElementById('datebtn'+date).classList.remove('btn-danger');
+					document.getElementById('datebtn'+date).classList.add('btn-success');
+					$('#searchbtn_all_daily').removeClass('btn-success');
+					$('#searchbtn_all_daily').addClass('btn-danger');
+					chek_daily[date]=1;
+					all_daily = 0;
+				} else {
+					document.getElementById('datebtn'+date).classList.remove('btn-success');
+					document.getElementById('datebtn'+date).classList.add('btn-danger');
+					$('#datebtn'+date).removeClass('btn-success');
+					$('#datebtn'+date).addClass('btn-danger');
+					chek_daily[date]=0;
+				}
+				var f;
+				for (f=0; f<route.length; f++) {
+					marker[route[f].point1*1].setVisible(false);
+					marker[route[f].point2*1].setVisible(false);
+					flightPath[f].setVisible(false);
+				}
+				for (f=0; f<route.length; f++) {
+					if ((chek_daily[route[f].date]==1 || all_daily == 1) && (chek_infecon[route[f].person_num]==1 || all_infecon==1)) {
+						marker[route[f].point1*1].setVisible(true);
+						marker[route[f].point2*1].setVisible(true);
+						flightPath[f].setVisible(true);
+					}
+				}
+			});
+		}
+		
+		function setlocation_all_infecon() {
+			all_infecon = 1;
+			$('#searchbtn_all_infecon').removeClass('btn-danger');
+			$('#searchbtn_all_infecon').addClass('btn-success');
+			for (f=0; f<route.length; f++) {
+				if (chek_daily[route[f].date]==1 || all_daily == 1) {
+					marker[route[f].point1*1].setVisible(true);
+					marker[route[f].point2*1].setVisible(true);
+					flightPath[f].setVisible(true);	
+				}
+			}
+			for (f=0; f<=all; f++) {
+				$('#searchbtn'+f).removeClass('btn-success');
+				$('#searchbtn'+f).addClass('btn-danger');
+				chek_infecon[f]=0;
+			}
+		}
+			
+		function setlocation_all_daily () {
+			all_daily = 1;
+			$('#searchbtn_all_daily').removeClass('btn-danger');
+			$('#searchbtn_all_daily').addClass('btn-success');
+			
+			for (f=0; f<route.length; f++) {
+				if (chek_infecon[route[f].person_num]==1 || all_infecon == 1) {
+					marker[route[f].point1*1].setVisible(true);
+					marker[route[f].point2*1].setVisible(true);
+					flightPath[f].setVisible(true);	
+				}
+			}
+			
+			var a, b, c, d, e, date;
+			firstday_day = 19;
+			firstday_month = 1;
+			firstday_year = 2020;
+			lastday_day = 19;
+			lastday_month = 2;
+			lastday_year = 2020;
+			for (d=firstday_year; d<=lastday_year; d++) {														//지금은 1년이상 넣을 일이 없지만 사태가 장기화된다면 이코드는 1년이상 넣을수 없으니 고치길
+				for (e=firstday_month; e<=lastday_month; e++) {
+					if (e>7) {												//달마다 일 갯수 구하기
+						c = 1;
+					} else {
+						c = 0;
+					}
+					if (e == lastday_month) {
+						b = lastday_day;
+					} else if (e%2 == c) {
+						if (e != 2) {
+							b = 30;
+						} else {
+							b = 28;
+						}
+					} else {
+						if (e != 2) {
+							b = 31;
+						} else {
+							b = 28;
+						}
+					}
+					for (a=firstday_day; a<=b; a++) {
+						date = d+"."+e+"."+a;
+						chek_daily[date] = 0;
+						document.getElementById('datebtn'+date).classList.remove('btn-success');
+						document.getElementById('datebtn'+date).classList.add('btn-danger');
+					}
+					firstday_day = 1;
+				}
+				firstday_month =1;
+			}
+		}
+		
+	</script>
+</body>
+</html>

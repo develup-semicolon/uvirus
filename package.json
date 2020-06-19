@@ -1,0 +1,36 @@
+{
+  "name": "coronavirusmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel2231/coronavirusmap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daniel2231/coronavirusmap/issues"
+  },
+  "homepage": "https://github.com/daniel2231/coronavirusmap#readme",
+  "dependencies": {
+    "admin-lte": "^3.0.2",
+    "bootstrap": "^4.4.1",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "jquery": "^3.4.1",
+    "ngx-onsenui": "^7.0.0",
+    "nodemon": "^2.0.2",
+    "onsenui": "^2.10.10",
+    "react-onsenui": "^1.11.2",
+    "reqeust": "^2.81.1",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "expose-loader": "^0.7.5"
+  }
+}

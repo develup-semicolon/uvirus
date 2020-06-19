@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>Uvirus Map Admin Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="header shadow">
+    <a class="logo">Uvirus Map</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn">
+      <span class="navicon"></span>
+    </label>
+    <ul class="menu">
+      <li>
+        <a href="#">메뉴</a>
+      </li>
+    </ul>
+  </div>
+  <div class="container-fluid" style="height: calc(100% - 80px)">
+    <h3>관리자 로그인</h3>
+    <form action="/admin/login" method="post">
+      <div class="form-group">
+        <input type="text" class="form-control" name="username" placeholder="사용자 이름">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="password" placeholder="패스워드">
+      </div>
+      <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+  </div>
+</body>
+</html>

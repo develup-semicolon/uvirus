@@ -1,0 +1,447 @@
+<%- include('./_head.ejs', {page: 'route'}) %>
+
+<div id="alertArea" style="position: fixed; right: 0; z-index: 10"></div>
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">경로</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin">홈</a></li>
+              <li class="breadcrumb-item active">경로</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">확진자 경로 정보</h3>
+                <div class="card-tools">
+                  <button class="btn btn-primary m-0" data-toggle="modal" data-target="#dataModal" data-num="-1">추가</button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body" style="overflow: auto">
+                <table id="tbl" class="table table-hover text-nowrap nowrap row-border stripe" style="display:none">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>확진자 번호</th>
+                      <th>날짜</th>
+                      <th>색상</th>
+                      <th>경로 출발지점</th>
+                      <th>경로 도착지점</th>
+                      <th>안전함 여부</th>
+                      <th>작업<%# 버튼들 %></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%
+                      for(var i = 0; i < data.route.length; i++) {
+                    %>
+                    <tr>
+                      <td class="table-cell-num"><%= data.route[i].num %></td>
+                      <td class="table-cell-person-num"><%= data.route[i].person_num %></td>
+                      <td class="table-cell-date"><%= data.route[i].date %></td>
+                      <td class="table-cell-color"><%= data.route[i].color %></td>
+                      <td class="table-cell-point1"><%= data.route[i].point1 %></td>
+                      <td class="table-cell-point2"><%= data.route[i].point2 %></td>
+                      <td class="table-cell-save"><%= data.route[i].save %></td>
+                      <td></td> <!-- 버튼용 칸 -->
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+    <!-- Modal -->
+    <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dataModalLabel">확진자 경로 추가</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="conflictAlert" class="alert alert-warning" style="display:none">
+              서버 데이터 변경이 감지되었습니다.<br>
+              다른 사람이 데이터를 수정한 것 같습니다.<br>
+              서버에서 가져온 데이터를 확인하고, 저장할 데이터를 정확하게 입력해주세요.
+            </div>
+            <div id="removedAlert" class="alert alert-danger" style="display:none">
+              서버에서 해당 데이터가 삭제된 것을 감지하였습니다.<br>
+              다른 사람이 삭제한 것 같습니다.<br>
+              이 데이터를 다시 저장하려면 추가/수정 버튼을 다시 눌러주세요.
+            </div>
+            <form>
+              <div class="form-group">
+                <label for="num" class="col-form-label">등록번호</label>
+                <input type="text" class="form-control" id="num" disabled>
+              </div>
+              <div class="form-group">
+                <label for="person_num" class="col-form-label">확진자 번호 (질본 기준)</label>
+                <input type="number" class="form-control" id="person_num_old" style="display:none" disabled>
+                <input type="number" class="form-control" id="person_num">
+              </div>
+              <div class="form-group">
+                <label for="date" class="col-form-label">날짜</label>
+                <input type="date" class="form-control" id="date_old" style="display:none" disabled>
+                <input type="date" class="form-control" id="date">
+              </div>
+              <div class="form-group">
+                <label for="color" class="col-form-label">색상</label>
+                <input type="color" class="form-control" id="color_old" style="display:none" disabled>
+                <input type="color" class="form-control" id="color">
+              </div>
+              <div class="form-group">
+                <label for="point1" class="col-form-label">경로 출발지점</label>
+                <input type="text" class="form-control" id="point1_old" style="display:none" disabled>
+                <select name="point1" id="point1" class="form-control">
+                  <%
+                    for(let i = 0; i < data.point.length; i++) {
+                  %>
+                  <option value="<%= i %>"><%= i %>. <%= data.point[i].name%></option>
+                  <% } %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="point2" class="col-form-label">경로 도착지점</label>
+                <input type="text" class="form-control" id="point2_old" style="display:none" disabled>
+                <select name="point2" id="point2" class="form-control">
+                  <%
+                    for(let i = 0; i < data.point.length; i++) {
+                  %>
+                  <option value="<%= i %>"><%= i %>. <%= data.point[i].name%></option>
+                  <% } %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="save" class="col-form-label">안전함 여부</label>
+                <input type="checkbox" class="form-control" id="save_old" style="display:none" disabled>
+                <input type="checkbox" class="form-control" id="save">
+              </div>
+              <div class="form-group">
+                <label for="memo" class="col-form-label">메모</label>
+                <textarea class="form-control" id="memo"></textarea>
+              </div>
+              <input type="hidden" id="isNew" value="1">
+              <input type="hidden" id="conflictConfirmed" value="0">
+              <input type="hidden" id="restoreConfirmed" value="0">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+              <button type="submit" class="btn btn-primary" id="submit">추가</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">확진자 경로 삭제</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-header">경고</h4>
+              <p>
+                이 작업은 되돌릴 수 없습니다.<br>
+                정말로 삭제하시겠습니까?
+              </p>
+            </div>
+            <input type="hidden" id="num">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            <button type="submit" class="btn btn-danger" id="submit">삭제</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.content-wrapper -->
+
+  <%- include('./_dataTable.ejs') %>
+
+  <script>
+  // TODO 누가 이것들 외부 스크립트 파일로 옮겨주세요
+  // 초기화
+  var route = []
+  var point = []
+  var table;
+  $.getJSON('/static/data/data.json', function(data) {
+    route = data.route
+    point = data.point
+
+    table = $("#tbl").DataTable({
+      columnDefs: [
+        {targets: 3, render: function(data) {
+          return '<div style="display: inline-block!important; width: 100%; height: 100%; position: relative; background-color: ' + data + '">' + data + '</div>'
+        }},
+        {targets: [4, 5], render: function(data) {
+          return data + '. ' + point[data].name
+        }},
+        {targets: 6, render: function(data) {
+          return '<big><big>' + (data == 1 ? '<div class="badge badge-success">안전</div>' : '<div class="badge badge-danger">위험</div>') + '</big></big>'
+        }},
+        {targets: 7, render: function(data, type, row) {
+          return '<button class="btn btn-primary" data-toggle="modal" data-target="#dataModal" data-num="' + row[0] + '">수정</button><button class="btn btn-danger m-1" data-toggle="modal" data-target="#deleteModal" data-num="' + row[0] + '">삭제</button>'
+        }}
+      ]
+    })
+    $('#tbl').css('display', 'block')
+  })
+  
+  // 추가/수정 모델 띄울 때
+  $("#dataModal").on("show.bs.modal", function(event) {
+    var button = $(event.relatedTarget)
+    var num = button.data('num')
+    var modal = $(this)
+
+    modal.find('#conflictConfirmed').val(0)
+    modal.find('#restoreConfirmed').val(0)
+    modal.find('#conflictAlert').css('display', 'none')
+    modal.find('#removedAlert').css('display', 'none')
+
+    modal.find('#person_num_old').css('display', 'none')
+    modal.find('#date_old').css('display', 'none')
+    modal.find('#color_old').css('display', 'none')
+    modal.find('#point1_old').css('display', 'none')
+    modal.find('#point2_old').css('display', 'none')
+    modal.find('#save_old').css('display', 'none')
+
+    if(num < 0) {
+      // 새 확진자 경로 추가
+      modal.find('.modal-title').text("새 확진자 경로 추가")
+      modal.find('#submit').text('추가')
+      modal.find('#isNew').val(1)
+
+      var body = modal.find('.modal-body')
+      body.find('.form-group #num').val(getNextNum(route))
+      body.find('.form-group #person_num').val(null)
+      body.find('.form-group #date').val(null)
+      body.find('.form-group #color').val(null)
+      body.find('.form-group #point1 option')[0].selected = true
+      body.find('.form-group #point2 option')[0].selected = true
+      body.find('.form-group #save').removeAttr('checked')
+    } else {
+      //n번 경로 수정
+      modal.find('.modal-title').text(num + "번 경로 수정")
+      modal.find('#submit').text('수정')
+      modal.find('#isNew').val(0)
+
+      var body = modal.find('.modal-body')
+      var selectedData = route.find(function(val) {
+        return val.num == num
+      })
+      body.find('.form-group #num').val(num)
+      body.find('.form-group #person_num').val(selectedData.person_num)
+      body.find('.form-group #date').val(selectedData.date)
+      body.find('.form-group #color').val(selectedData.color)
+      body.find('.form-group #point1 option')[selectedData.point1].selected = true
+      body.find('.form-group #point2 option')[selectedData.point2].selected = true
+      body.find('.form-group #save').prop('checked', (selectedData.save == 1))
+    }
+  })
+
+  // 삭제 창
+  $('#deleteModal').on('show.bs.modal', function(e) {
+    var button = $(e.relatedTarget)
+    var num = button.data('num')
+    var modal = $(this)
+
+    modal.find('.modal-title').text(num + "번 경로 삭제")
+    modal.find('#num').val(num)
+
+  })
+
+  // 데이터 저장 요청시
+  $('#dataModal div .modal-body form').on('submit', function(e) {
+    e.preventDefault()
+    var modalBody = $(this).parent()
+    var num = modalBody.find('.form-group #num').val()
+    var point1 = modalBody.find('.form-group #point1')
+    var point2 = modalBody.find('.form-group #point2')
+    var newData = {
+      person_num: modalBody.find('.form-group #person_num').val(),
+      date: modalBody.find('.form-group #date').val(),
+      color: modalBody.find('.form-group #color').val(),
+      point1: point1[0].options[point1[0].selectedIndex].value,
+      point2: point2[0].options[point2[0].selectedIndex].value,
+      save: modalBody.find('.form-group #save').prop('checked') ? 1 : 0
+    }
+
+    // 수정 전 서버와 데이터 비교하여 바뀌지 않았는지 확인 (동시 편집으로 인해 덮어씌워지는 것을 방지)
+    $.getJSON('/static/data/data.json', function(json) {
+      var restoreConfirmed = modalBody.find('#restoreConfirmed').val()
+
+      var oldData = route.find(function(val) {
+        return val.num == num
+      })
+      var serverData = json.route.find(function(val) {
+        return val.num == num
+      })
+      if(modalBody.find('#isNew').val() !== '0' || restoreConfirmed == 1) {
+        // 새로 추가
+        if(restoreConfirmed == 1) {
+          table.row(function(idx, data, node) {
+            return data[0] == num
+          }).remove()
+        }
+
+        newData.num = getNextNum(json.route)
+
+        $('#dataModal').modal('hide')
+        $.post({
+          url: '/api/route',
+          data: newData,
+          dataType: 'json'
+        }).done(function(json) {
+          insertRow(json)
+          route.push(json)
+          makeSuccessAlert(json.num + '번 경로를 생성하였습니다.')
+        }).fail(function (xhr, status, error) {
+          makeErrorAlert(newData.num + '번 경로를 생성하던 중 오류가 발생하였습니다:', error)
+        })
+        return
+      }
+
+      var conflictConfirmed = modalBody.find('#conflictConfirmed').val()
+      
+      if(serverData == null && conflictConfirmed != 1) {
+        // 서버에서 삭제됨
+        alert('서버에서 해당 데이터가 삭제된 것을 감지하였습니다.\n다른 사람이 삭제한 것 같습니다.\n이 데이터를 다시 저장하려면 추가/수정 버튼을 다시 눌러주세요.')
+        modalBody.find('#removedAlert').css('display', 'block')
+        modalBody.find('#restoreConfirmed').val(1)
+        return
+      }
+      
+      var personNumChanged = serverData.person_num !== oldData.person_num,
+        dateChanged = serverData.date !== oldData.date,
+        colorChanged = serverData.color !== oldData.color,
+        point1Changed = serverData.point1 != oldData.point1,
+        point2Changed = serverData.point2 != oldData.point2,
+        saveChanged = serverData.save != oldData.save
+
+      if((personNumChanged || dateChanged || colorChanged || point1Changed || point2Changed || saveChanged) && conflictConfirmed != 1) {
+        // 서버와 데이터가 다름
+        alert('서버 데이터 변경이 감지되었습니다.\n다른 사람이 데이터를 수정한 것 같습니다.\n서버에서 가져온 데이터를 확인하고, 저장할 데이터를 정확하게 입력해주세요.')
+        modalBody.find('#conflictAlert').css('display', 'block')
+        modalBody.find('#person_num_old').css('display', 'block').val(serverData.person_num)
+        modalBody.find('#date_old').css('display', 'block').val(serverData.date)
+        modalBody.find('#color_old').css('display', 'block').val(serverData.color)
+        modalBody.find('#point1_old').css('display', 'block').val(serverData.point1 + '. ' + point[serverData.point1].name)
+        modalBody.find('#point2_old').css('display', 'block').val(serverData.point2 + '. ' + point[serverData.point2].name)
+        modalBody.find('#save_old').css('display', 'block').prop('checked', (serverData.save == 1))
+
+        modalBody.find('#conflictConfirmed').val(1)
+        return
+      }
+
+      // 여기까지 왔다면 이상 없음. 수정 실행.
+      $('#dataModal').modal('hide')
+
+      newData.num = num
+      $.ajax({
+        url: '/api/route/' + num,
+        method: 'PATCH',
+        data: newData,
+        dataType: 'json'
+      }).done(function(json) {
+        table.row(function(idx, data, node) {
+          return data[0] == json.num
+        }).data([json.num, json.person_num, json.date, json.color, json.point1, json.point2, json.save, '']).draw()
+        route[route.findIndex(function(val) {
+          return val.num == json.num
+        })] = {
+          num: json.num,
+          person_num: json.person_num,
+          date: json.date,
+          color: json.color,
+          point1: json.point1,
+          point2: json.point2,
+          save: json.save
+        }
+        makeSuccessAlert(json.num + '번 경로가 수정되었습니다.')
+      }).fail(function(xhr, status, error) {
+        makeErrorAlert(newData.num + '번 경로를 수정하던 중 오류가 발생하였습니다:', error)
+      })
+    })
+  })
+
+  // 데이터 삭제 요청시
+  $('#deleteModal div .modal-body form').on('submit', function(e) {
+    e.preventDefault()
+    var modalBody = $(this).parent()
+    var num = modalBody.find('#num').val()
+
+    $('#deleteModal').modal('hide')
+    $.ajax({
+      url: '/api/route/' + num,
+      method: 'DELETE',
+      dataType: 'json'
+    }).done(function(json) {
+      table.row(function(idx, data, node) {
+        return data[0] == num
+      }).remove().draw()
+      route.splice(route.findIndex(function(val) {
+        return val.num == num
+      }), 1)
+      makeSuccessAlert(num + '번 경로가 삭제되었습니다.')
+    }).fail(function(xhr, status, error) {
+      makeErrorAlert(num + '번 경로를 삭제하던 중 오류가 발생하였습니다:', error)
+    })
+  })
+
+  function getNextNum(d) {
+    var i = 0
+    d.forEach(function(val) {
+      if(parseInt(val.num) > i) i = val.num
+    })
+    return parseInt(i) + 1
+  }
+
+  function makeSuccessAlert(content) {
+    $('#alertArea').prepend($('<div class="alert alert-success alert-dismissible fade show m-2" style="right: 0; float: right; display: inline-block">' + content + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'))
+  }
+  function makeErrorAlert(content, errorMsg) {
+    $('#alertArea').prepend($('<div class="alert alert-danger alert-dismissible fade show m-2" style="right: 0; float: right; display: inline-block">' + content + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + (errorMsg ? '<hr>' + errorMsg : '') + '</div>'))
+  }
+
+  // table에 새 데이터 넣기
+  function insertRow(data) {
+    table.row.add([data.num, data.person_num, data.date, data.color, data.point1, data.point2, data.save, '<button class="btn btn-primary" data-toggle="modal" data-target="#dataModal" data-no="' + data.num + '">수정</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-no="' + data.num + '">삭제</button>']).draw()
+  }
+  </script>
+
+<%- include('./_tail.ejs') %>
